@@ -11,7 +11,7 @@
  */
 
 namespace Codexpert\Did_Manager;
-use Codexpert\Plugin\Notice;
+use WpPluginHub\Plugin\Notice;
 
 /**
  * if accessed directly, exit.
@@ -167,7 +167,7 @@ final class Plugin {
 			 * Shortcode related hooks
 			 */
 			$shortcode = new App\Shortcode( $this->plugin );
-			$shortcode->register( 'my_shortcode', 'my_shortcode' );
+			$shortcode->register( 'did-manager', 'did_manager' );
 
 		endif;
 

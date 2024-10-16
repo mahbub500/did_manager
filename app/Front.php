@@ -3,7 +3,7 @@
  * All public facing functions
  */
 namespace Codexpert\Did_Manager\App;
-use Codexpert\Plugin\Base;
+use WpPluginHub\Plugin\Base;
 use Codexpert\Did_Manager\Helper;
 /**
  * if accessed directly, exit.
@@ -41,7 +41,11 @@ class Front extends Base {
 
 		wp_enqueue_style( $this->slug, plugins_url( "/assets/css/front{$min}.css", DID_MANAGER ), '', $this->version, 'all' );
 
+		wp_enqueue_style( 'boostrap', 'https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css', '', $this->version, 'all' );
+
 		wp_enqueue_script( $this->slug, plugins_url( "/assets/js/front{$min}.js", DID_MANAGER ), [ 'jquery' ], $this->version, true );
+
+		wp_enqueue_script( 'boostrap', 'https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js', [ 'jquery' ], $this->version, true );
 		
 		$localized = [
 			'ajaxurl'	=> admin_url( 'admin-ajax.php' ),

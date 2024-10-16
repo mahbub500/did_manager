@@ -3,7 +3,7 @@
  * All AJAX related functions
  */
 namespace Codexpert\Did_Manager\App;
-use Codexpert\Plugin\Base;
+use WpPluginHub\Plugin\Base;
 
 /**
  * if accessed directly, exit.

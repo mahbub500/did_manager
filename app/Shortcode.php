@@ -3,7 +3,8 @@
  * All Shortcode related functions
  */
 namespace Codexpert\Did_Manager\App;
-use Codexpert\Plugin\Base;
+use WpPluginHub\Plugin\Base;
+use Codexpert\Did_Manager\Helper;
 
 /**
  * if accessed directly, exit.
@@ -31,7 +32,7 @@ class Shortcode extends Base {
         $this->version  = $this->plugin['Version'];
     }
 
-    public function my_shortcode() {
+    public function did_manager() {
         return __( 'My Shortcode', 'did-manager' );
     }
 }
