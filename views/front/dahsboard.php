@@ -1,4 +1,6 @@
-<?php  ?>
+<?php  
+    use Codexpert\Did_Manager\Helper;
+?>
 
 <div class="container mt-5">
   <div class="row">
@@ -20,8 +22,9 @@
       <!-- Tab Content -->
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
-          <h3>Did list</h3>
-          <p>This is the content for Tab 1.</p>
+          <?php 
+        echo Helper::get_template( 'did_list', '/views/front/did' );
+           ?>
         </div>
         <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
           <h3>Add Did</h3>
