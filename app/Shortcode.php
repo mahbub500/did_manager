@@ -33,6 +33,8 @@ class Shortcode extends Base {
     }
 
     public function did_manager() {
-        return __( 'My Shortcode', 'did-manager' );
+
+        $data = Helper::get_template( 'dahsboard', '/views/front/' );
+        return $data;
     }
 }
