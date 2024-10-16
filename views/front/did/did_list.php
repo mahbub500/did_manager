@@ -2,7 +2,7 @@
   <div class="form-group row">
     <label for="dm_nid" class="col-sm-2 col-form-label">Nid :</label>
     <div class="col-sm-10">
-      <input type="number" readonly class="form-control-plaintext" id="dm_nid" placeholder="Enter your Nid" >
+      <input type="number" class="form-control-plaintext" id="dm_nid" placeholder="Enter your Nid" >
       <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
 
     </div>
