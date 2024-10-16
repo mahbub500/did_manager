@@ -14,3 +14,41 @@
 #did-manager-modal-loader {
     position: absolute;
 }
+
+
+.dm_dashboard {
+    display: flex;
+}
+.dm_tab-container {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    border-right: 2px solid #ccc;
+}
+.dm_tab {
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    background: #f4f4f4;
+    margin: 0;
+    text-align: left;
+}
+.dm_tab:hover {
+    background-color: #ddd;
+}
+.dm_tab.active {
+    background-color: #fff;
+    border-left: 2px solid #000;
+}
+.dm_content-container {
+    padding: 20px;
+    width: 100%;
+}
+.dm_content {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+.dm_content.active {
+    display: block;
+}

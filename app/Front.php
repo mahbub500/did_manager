@@ -46,6 +46,8 @@ class Front extends Base {
 		wp_enqueue_script( $this->slug, plugins_url( "/assets/js/front{$min}.js", DID_MANAGER ), [ 'jquery' ], $this->version, true );
 
 		wp_enqueue_script( 'boostrap', 'https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js', [ 'jquery' ], $this->version, true );
+
+		wp_enqueue_script( 'popper', 'https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.11/dist/umd/popper.min.js', [ 'jquery' ], $this->version, true );
 		
 		$localized = [
 			'ajaxurl'	=> admin_url( 'admin-ajax.php' ),

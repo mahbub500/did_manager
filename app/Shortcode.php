@@ -34,7 +34,7 @@ class Shortcode extends Base {
 
     public function did_manager() {
 
-        $data = Helper::get_template( 'dahsboard', '/views/front/' );
-        return $data;
+        $dashboard = Helper::get_template( 'dahsboard', '/views/front/' );
+        return $dashboard;
     }
 }
