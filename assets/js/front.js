@@ -30,10 +30,24 @@ jQuery(function($){
 	    checkLength(this, '#dm_nid');
 	});
 
+	$('#add_user_form').on('submit', function(event) {
+        event.preventDefault(); 
 
-    $( "#dm_nid" ).on( "blur", function() {
+        const formData = $(this).serialize(); 
 
-    } );
-      
+        $.ajax({
+           type: 'POST',
+           url: DID_MANAGER.ajaxurl, 
+           data: formData + '&action=add_user&_wpnonce=' + DID_MANAGER._wpnonce, 
+		   success: function(response) {
+                // alert('Form submitted successfully!');
+                console.log(response);
+            },
+            error: function(error) {
+                alert('Form submission failed!');
+                // console.log(error);
+            }
+        });
+    });      
 	
 })

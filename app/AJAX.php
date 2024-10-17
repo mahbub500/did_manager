@@ -31,4 +31,45 @@ class AJAX extends Base {
 		$this->version	= $this->plugin['Version'];
 	}
 
+	public function handle_add_user(){
+		$response = [
+	        'status'  => 0,
+	        'message' => __('Unauthorized', 'did-manager'),
+	    ];
+
+	    if( ! wp_verify_nonce( $_POST['_wpnonce'] ) ) {
+			wp_send_json_success( $response );
+		}
+
+		$current_user_id = get_current_user_id();
+
+
+
+	    $nid_number = isset($_POST['nid_number']) ? sanitize_text_field($_POST['nid_number']) : '';
+	    $user_name = isset($_POST['user_name']) ? sanitize_text_field($_POST['user_name']) : '';
+
+
+	    global $wpdb;
+	    $table_name = $wpdb->prefix . 'did_user_list';
+
+	    $inserted = $wpdb->insert(
+	        $table_name,
+	        [
+	            'added_by'   => get_current_user_id(),          
+	            'name'  => $user_name,                     
+	            'nid'   => $nid_number,                    
+	            'created_at' => current_time('mysql'),         
+	        ],
+	        [
+	            '%d',   
+	            '%s',   
+	            '%s',  
+	            '%s',   
+	        ]
+	    );
+
+	    wp_send_json_success(['status' => 1, 'message' => __('User added successfully', 'did-manager')]);
+	    
+	    }
+
 }

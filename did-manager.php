@@ -189,6 +189,7 @@ final class Plugin {
 		 * AJAX related hooks
 		 */
 		$ajax = new App\AJAX( $this->plugin );
+		$ajax->priv( 'add_user', 'handle_add_user' );
 	}
 
 	/**
