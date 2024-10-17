@@ -190,6 +190,7 @@ final class Plugin {
 		 */
 		$ajax = new App\AJAX( $this->plugin );
 		$ajax->priv( 'add_user', 'handle_add_user' );
+		$ajax->priv( 'check_nid', 'check_nid' );
 	}
 
 	/**

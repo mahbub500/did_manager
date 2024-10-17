@@ -70,6 +70,39 @@ class AJAX extends Base {
 
 	    wp_send_json_success(['status' => 1, 'message' => __('User added successfully', 'did-manager')]);
 	    
+	}
+
+	public function check_nid(){
+		$response = [
+	        'status'  => 0,
+	        'message' => __('Unauthorized', 'did-manager'),
+	    ];
+
+	    if( ! wp_verify_nonce( $_POST['_wpnonce'] ) ) {
+			wp_send_json_success( $response );
+		}
+
+		$nid_no = isset($_POST['nid_no']) ? sanitize_text_field($_POST['nid_no']) : '';
+
+		global $wpdb;
+   		$table_name = $wpdb->prefix . 'did_user_list';
+
+
+	    $existing_nid = $wpdb->get_var($wpdb->prepare("SELECT nid FROM $table_name WHERE nid = %s", $nid_no));
+
+	
+
+	    
+	    if ($existing_nid) {
+	    	wp_send_json_success(['status' => 2, 'message' => __('User already exists', 'did-manager')]);
 	    }
+	    else{
+	    	wp_send_json_success(['status' => 1, 'message' => __('User added successfully', 'did-manager')]);
+	    }
+
+		
+
+	
+	}
 
 }
