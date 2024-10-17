@@ -10,9 +10,9 @@
     },
     "autoload": {
         "psr-4": {
-            "Codexpert\\Did_Manager\\" : "classes/",
-            "Codexpert\\Did_Manager\\App\\" : "app/",
-            "Codexpert\\Did_Manager\\API\\" : "api/"
+            "wppluginhub\\Did_Manager\\" : "classes/",
+            "wppluginhub\\Did_Manager\\App\\" : "app/",
+            "wppluginhub\\Did_Manager\\API\\" : "api/"
         },
         "files": [ "inc/functions.php" ]
     }

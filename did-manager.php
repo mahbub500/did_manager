@@ -10,7 +10,7 @@
  * Domain Path: /languages
  */
 
-namespace Codexpert\Did_Manager;
+namespace wppluginhub\Did_Manager;
 use WpPluginHub\Plugin\Notice;
 
 /**

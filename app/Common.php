@@ -2,7 +2,7 @@
 /**
  * All common functions to load in both admin and front
  */
-namespace Codexpert\Did_Manager\App;
+namespace wppluginhub\Did_Manager\App;
 use WpPluginHub\Plugin\Base;
 
 /**

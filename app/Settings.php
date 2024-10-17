@@ -2,8 +2,8 @@
 /**
  * All settings related functions
  */
-namespace Codexpert\Did_Manager\App;
-use Codexpert\Did_Manager\Helper;
+namespace wppluginhub\Did_Manager\App;
+use wppluginhub\Did_Manager\Helper;
 use WpPluginHub\Plugin\Base;
 use WpPluginHub\Plugin\Settings as Settings_API;
 

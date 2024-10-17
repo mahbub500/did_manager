@@ -2,7 +2,7 @@
 /**
  * All admin facing functions
  */
-namespace Codexpert\Did_Manager\App;
+namespace wppluginhub\Did_Manager\App;
 use WpPluginHub\Plugin\Base;
 use WpPluginHub\Plugin\Metabox;
 

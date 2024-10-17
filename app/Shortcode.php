@@ -2,9 +2,9 @@
 /**
  * All Shortcode related functions
  */
-namespace Codexpert\Did_Manager\App;
+namespace wppluginhub\Did_Manager\App;
 use WpPluginHub\Plugin\Base;
-use Codexpert\Did_Manager\Helper;
+use wppluginhub\Did_Manager\Helper;
 
 /**
  * if accessed directly, exit.

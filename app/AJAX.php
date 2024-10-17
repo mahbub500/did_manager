@@ -2,7 +2,7 @@
 /**
  * All AJAX related functions
  */
-namespace Codexpert\Did_Manager\App;
+namespace wppluginhub\Did_Manager\App;
 use WpPluginHub\Plugin\Base;
 
 /**
