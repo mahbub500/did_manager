@@ -9,8 +9,10 @@ let dm_modal = ( show = true ) => {
 
 jQuery(function($){
 
+    $('#dm_notice').hide();
+
     $( "#dm_nid" ).on( "blur", function() {
-        
+
     } );
       
 	
