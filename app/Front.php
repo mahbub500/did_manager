@@ -32,7 +32,9 @@ class Front extends Base {
 	}
 
 	public function head() {
-		// Helper::pri( 'trst' );
+		
+
+
 	}
 	
 	/**

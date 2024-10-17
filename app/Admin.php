@@ -57,31 +57,24 @@ class Admin extends Base {
 
 		global $wpdb;
 
+		$table_name = $wpdb->prefix . 'did_user_list';
 
-	    $table_name = $wpdb->prefix . 'did_user_list';
+		if( $wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name ) {
+		    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
+		    $charset_collate = $wpdb->get_charset_collate();
 
-	    if( $wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name ) {
-	        
+		    $sql = "CREATE TABLE $table_name (
+		        id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+		        added_by BIGINT(20) UNSIGNED NOT NULL,
+		        name VARCHAR(255) NOT NULL,
+		        nid VARCHAR(100) NOT NULL,
+		        created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+		        PRIMARY KEY (id)  -- Removed the trailing comma here
+		    ) $charset_collate;";
 
-	        $charset_collate = $wpdb->get_charset_collate();
-
-	        $sql = "CREATE TABLE $table_name (
-	            id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-	            added_by BIGINT(20) UNSIGNED NOT NULL,
-	            user_name VARCHAR(255) NOT NULL,
-	            user_nid VARCHAR(100) NOT NULL,
-	            created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
-	            PRIMARY KEY (id),
-	            KEY user_id (user_id)
-	        ) $charset_collate;";
-
-
-	        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-
-
-	        dbDelta($sql);
-	    }
+		    dbDelta( $sql );
+		}
 	}
 
 	/**
