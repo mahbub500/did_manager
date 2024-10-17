@@ -2,7 +2,7 @@
 /**
  * All helpers functions
  */
-namespace Codexpert\Did_Manager;
+namespace wppluginhub\Did_Manager;
 
 /**
  * if accessed directly, exit.
