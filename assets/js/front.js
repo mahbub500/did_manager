@@ -33,13 +33,13 @@ jQuery(function($){
 	$('#add_user_form').on('submit', function(event) {
 	    event.preventDefault(); 
 
-	    const formData = new FormData(this); // Use FormData to handle file uploads
+	    const formData = new FormData(this);
 	    dm_modal();
 
 	    $.ajax({
 	        type: 'POST',
 	        url: DID_MANAGER.ajaxurl, 
-	        data: formData, 
+	        data: formData + '&action=add_user&_wpnonce=' + DID_MANAGER._wpnonce,
 	        contentType: false, 
 	        processData: false, 
 	        success: function(response) {
