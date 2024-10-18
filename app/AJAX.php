@@ -45,8 +45,35 @@ class AJAX extends Base {
 
 
 
-	    $nid_number = isset($_POST['nid_number']) ? sanitize_text_field($_POST['nid_number']) : '';
-	    $user_name = isset($_POST['user_name']) ? sanitize_text_field($_POST['user_name']) : '';
+	    $nid_number 	= isset($_POST['nid_number']) ? sanitize_text_field($_POST['nid_number']) : '';
+	    $user_name 		= isset($_POST['user_name']) ? sanitize_text_field($_POST['user_name']) : '';
+
+
+	    if (!empty($_FILES['dm_image']['name'])) {
+	     
+
+	        $upload = wp_handle_upload($_FILES['dm_image'], array('test_form' => false));
+
+	        if (isset($upload['file'])) {
+	            $file_name = basename($upload['file']);
+	            $file_type = wp_check_filetype($upload['file']);
+	            
+	           
+	            $attachment = array(
+	                'guid'           => $upload['url'],
+	                'post_mime_type' => $file_type['type'],
+	                'post_title'     => preg_replace('/\.[^.]+$/', '', $file_name),
+	                'post_content'   => '',
+	                'post_status'    => 'inherit'
+	            );
+
+
+	            $attachment_id = wp_insert_attachment($attachment, $upload['file']);
+	            require_once(ABSPATH . 'wp-admin/includes/image.php');
+	            $attachment_data = wp_generate_attachment_metadata($attachment_id, $upload['file']);
+	            wp_update_attachment_metadata($attachment_id, $attachment_data);
+	        } 
+	    }
 
 
 	    global $wpdb;
@@ -93,7 +120,7 @@ class AJAX extends Base {
 	
 
 	    
-	    if ($existing_nid) {
+	    if ( $existing_nid ) {
 	    	wp_send_json_success(['status' => 2, 'message' => __('User already exists', 'did-manager')]);
 	    }
 	    else{

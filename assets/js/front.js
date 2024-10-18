@@ -31,25 +31,27 @@ jQuery(function($){
 	});
 
 	$('#add_user_form').on('submit', function(event) {
-        event.preventDefault(); 
+	    event.preventDefault(); 
 
-        const formData = $(this).serialize(); 
-        dm_modal();
+	    const formData = new FormData(this); // Use FormData to handle file uploads
+	    dm_modal();
 
-        $.ajax({
-           type: 'POST',
-           url: DID_MANAGER.ajaxurl, 
-           data: formData + '&action=add_user&_wpnonce=' + DID_MANAGER._wpnonce, 
-		   success: function(response) {
-		   	dm_modal(false);
-                // alert('Form submitted successfully!');
-
-            },
-            error: function(error) {
-                alert('Form submission failed!');
-            }
-        });
-    });  
+	    $.ajax({
+	        type: 'POST',
+	        url: DID_MANAGER.ajaxurl, 
+	        data: formData, 
+	        contentType: false, 
+	        processData: false, 
+	        success: function(response) {
+	            dm_modal(false);
+	            alert('Form submitted successfully!');
+	        },
+	        error: function(error) {
+	            alert('Form submission failed!');
+	        }
+	    });
+	});
+  
 
     $('#dm_nid').on('blur', function() {
     	const length = $(this).val().length;

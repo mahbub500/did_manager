@@ -60,20 +60,24 @@ class Admin extends Base {
 		$table_name = $wpdb->prefix . 'did_user_list';
 
 		if( $wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name ) {
-		    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
-		    $charset_collate = $wpdb->get_charset_collate();
+			require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+			$charset_collate = $wpdb->get_charset_collate();
 
-		    $sql = "CREATE TABLE $table_name (
-		        id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-		        added_by BIGINT(20) UNSIGNED NOT NULL,
-		        name VARCHAR(255) NOT NULL,
-		        nid VARCHAR(100) NOT NULL,
-		        created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
-		        PRIMARY KEY (id)  -- Removed the trailing comma here
-		    ) $charset_collate;";
+			$sql = "CREATE TABLE $table_name (
+			    id BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+			    nid_number VARCHAR(50) NOT NULL,
+			    user_name VARCHAR(100) NOT NULL,
+			    birthday DATE NOT NULL,
+			    mobile_no VARCHAR(20) NOT NULL,
+			    village VARCHAR(100) DEFAULT NULL,
+			    word_no INT(11) DEFAULT NULL,
+			    image_url VARCHAR(255) DEFAULT NULL,
+			    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+			) $charset_collate;";
 
-		    dbDelta( $sql );
+			dbDelta($sql);
+
 		}
 	}
 
