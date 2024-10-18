@@ -32,85 +32,80 @@ class AJAX extends Base {
 	}
 
 	function handle_add_user_data() {
-	    if (!isset($_POST['_wpnonce']) || !wp_verify_nonce($_POST['_wpnonce'], 'add_user_nonce')) {
-	        wp_send_json_error('Invalid request');
-	        return;
+	    $response = [
+	        'status'  => 0,
+	        'message' => __('Unauthorized', 'did-manager'),
+	    ];
+
+	    if (!wp_verify_nonce($_POST['_wpnonce'])) {
+	        wp_send_json_success($response);
 	    }
 
-
 	    $nid_number = sanitize_text_field($_POST['nid_number']);
-	    $user_name = sanitize_text_field($_POST['user_name']);
-	    $birthday = sanitize_text_field($_POST['dm_birthday']);
-	    $mobile_no = sanitize_text_field($_POST['dm_mobile_no']);
-	    $village = sanitize_text_field($_POST['dm_village']);
-	    $word_no = sanitize_text_field($_POST['dm_word_no']);
+	    $user_name  = sanitize_text_field($_POST['user_name']);
+	    $birthday   = sanitize_text_field($_POST['dm_birthday']);
+	    $mobile_no  = sanitize_text_field($_POST['dm_mobile_no']);
+	    $village    = sanitize_text_field($_POST['dm_village']);
+	    $word_no    = sanitize_text_field($_POST['dm_word_no']);
 
-	   
-
-	    $user_data = array(
-	        'nid_number' => $nid_number,
-	        'user_name' => $user_name,
-	        'birthday' => $birthday,
-	        'mobile_no' => $mobile_no,
-	        'village' => $village,
-	        'word_no' => $word_no
-	    );
-	    update_option('user_data_' . $nid_number, $user_data); 
-
-
+	    $attachment_id = 0;
 
 	    if (!empty($_FILES['dm_image']['name'])) {
 	        $uploaded_file = $_FILES['dm_image'];
+	        $file_name = sanitize_file_name($nid_number . '-' . $uploaded_file['name']);
+	        $upload_overrides = ['test_form' => false, 'unique_filename_callback' => function($dir, $name, $ext) use ($file_name) {
+	            return $file_name;
+	        }];
 
+	        $upload = wp_handle_upload($uploaded_file, $upload_overrides);
 
-	        $upload_dir = wp_upload_dir();
-	        $custom_dir = $upload_dir['basedir'] . '/did_image'; 
+	        if ($upload && !isset($upload['error'])) {
+	            $attachment_data = [
+	                'guid'           => $upload['url'],
+	                'post_mime_type' => $upload['type'],
+	                'post_title'     => sanitize_file_name($file_name),
+	                'post_content'   => '',
+	                'post_status'    => 'inherit',
+	            ];
 
-	        if (!file_exists($custom_dir)) {
-	            wp_mkdir_p($custom_dir); 
-	        }
-
-
-	        $file_name = sanitize_file_name($uploaded_file['name']);
-	        $file_path = $custom_dir . '/' . $file_name;
-
-	        if (move_uploaded_file($uploaded_file['tmp_name'], $file_path)) {
-	            
-	            $file_url = $upload_dir['baseurl'] . '/did_image/' . $file_name;
-	            update_option('user_image_' . $nid_number, $file_url);
+	            $attachment_id = wp_insert_attachment($attachment_data, $upload['file']);
+	            require_once(ABSPATH . 'wp-admin/includes/image.php');
+	            $attachment_metadata = wp_generate_attachment_metadata($attachment_id, $upload['file']);
+	            wp_update_attachment_metadata($attachment_id, $attachment_metadata);
 	        } else {
-	            wp_send_json_error('Failed to upload image');
+	            wp_send_json_error('Failed to upload image: ' . $upload['error']);
 	        }
 	    }
 
 	    global $wpdb;
-		$table_name = $wpdb->prefix . 'did_user_data';
+	    $table_name = $wpdb->prefix . 'did_user_data';
 
-		$wpdb->insert(
-		    $table_name,
-		    array(
-		        'nid_number' => $nid_number,
-		        'user_name' => $user_name,
-		        'birthday' => $birthday,
-		        'mobile_no' => $mobile_no,
-		        'village' => $village,
-		        'word_no' => $word_no,
-		        'image_url' => $file_url
-		    ),
-		    array(
-		        '%s', 
-		        '%s', // user_name
-		        '%s', // birthday
-		        '%s', // mobile_no
-		        '%s', // village
-		        '%d', // word_no
-		        '%s'  // image_url
-		    )
-		);
-
+	    $wpdb->insert(
+	        $table_name,
+	        array(
+	            'nid_number'   => $nid_number,
+	            'user_name'    => $user_name,
+	            'birthday'     => $birthday,
+	            'mobile_no'    => $mobile_no,
+	            'village'      => $village,
+	            'word_no'      => $word_no,
+	            'attachment_id'=> $attachment_id
+	        ),
+	        array(
+	            '%s',
+	            '%s',
+	            '%s',
+	            '%s',
+	            '%s',
+	            '%d',
+	            '%d'
+	        )
+	    );
 
 	    wp_send_json_success('Form data and image saved successfully');
 	}
+
+
 
 
 	public function check_nid(){
@@ -138,12 +133,9 @@ class AJAX extends Base {
 	    	wp_send_json_success(['status' => 2, 'message' => __('User already exists', 'did-manager')]);
 	    }
 	    else{
-	    	wp_send_json_success(['status' => 1, 'message' => __('User added successfully', 'did-manager')]);
+	    	wp_send_json_success(['status' => 1, 'message' => __('This is unique user', 'did-manager')]);
 	    }
 
-		
-
-	
 	}
 
 }

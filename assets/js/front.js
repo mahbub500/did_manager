@@ -31,26 +31,33 @@ jQuery(function($){
 	});
 
 	$('#add_user_form').on('submit', function(event) {
-	    event.preventDefault(); 
+    event.preventDefault(); 
 
-	    const formData = new FormData(this);
-	    dm_modal();
+    const formData = new FormData(this); // Initialize FormData with the form element
 
-	    $.ajax({
-	        type: 'POST',
-	        url: DID_MANAGER.ajaxurl, 
-	        data: formData + '&action=add_user&_wpnonce=' + DID_MANAGER._wpnonce,
-	        contentType: false, 
-	        processData: false, 
-	        success: function(response) {
-	            dm_modal(false);
-	            alert('Form submitted successfully!');
-	        },
-	        error: function(error) {
-	            alert('Form submission failed!');
-	        }
-	    });
-	});
+    // Append additional data like action and nonce
+    formData.append('action', 'add_user');
+    formData.append('_wpnonce', DID_MANAGER._wpnonce);
+
+    dm_modal();
+
+    $.ajax({
+        type: 'POST',
+        url: DID_MANAGER.ajaxurl, 
+        data: formData, // Use FormData object directly
+        contentType: false, // Required for FormData
+        processData: false, // Required for FormData
+        success: function(response) {
+            dm_modal(false);
+            alert('Form submitted successfully!');
+        },
+        error: function(error) {
+            alert('Form submission failed!');
+            dm_modal(false);
+        }
+    });
+});
+
   
 
     $('#dm_nid').on('blur', function() {

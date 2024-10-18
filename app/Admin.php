@@ -72,7 +72,7 @@ class Admin extends Base {
 			    mobile_no VARCHAR(20) NOT NULL,
 			    village VARCHAR(100) DEFAULT NULL,
 			    word_no INT(11) DEFAULT NULL,
-			    image_url VARCHAR(255) DEFAULT NULL,
+			    attachment_id BIGINT(20) UNSIGNED DEFAULT NULL,
 			    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 			) $charset_collate;";
 
