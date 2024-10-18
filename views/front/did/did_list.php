@@ -42,14 +42,19 @@
   <div class="form-group row">
     <label for="dm_image" class="col-sm-2 col-form-label">Image :</label>
     <div class="col-sm-10">
-      <input type="file" name="dm_image" class="form-control" id="dm_image" >
+      <input type="file" name="dm_image" class="form-control image-input" id="dm_image" data-preview="#image_preview" accept="image/*">
+    <img id="image_preview" src="" alt="Image Preview" style="display:none; max-width: 100px; margin-top: 10px;" />
+
+
     </div>
   </div>
 
   <div class="form-group row">
     <label for="dm_nid" class="col-sm-2 col-form-label">Nid :</label>
     <div class="col-sm-10">
-      <input type="file" name="dm_nid" class="form-control" id="dm_nid" >
+      <input type="file" name="dm_nid" class="form-control image-input" id="dm_nid" data-preview="#nid_preview" accept="image/*">
+<img id="nid_preview" src="" alt="NID Preview" style="display:none; max-width: 100px; margin-top: 10px;" />
+
     </div>
   </div>
    <button id="dm_submit" type="submit" disabled class="btn btn-primary">Submit</button>

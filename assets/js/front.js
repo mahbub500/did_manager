@@ -31,32 +31,32 @@ jQuery(function($){
 	});
 
 	$('#add_user_form').on('submit', function(event) {
-    event.preventDefault(); 
+	    event.preventDefault(); 
 
-    const formData = new FormData(this); // Initialize FormData with the form element
+	    const formData = new FormData(this); // Initialize FormData with the form element
 
-    // Append additional data like action and nonce
-    formData.append('action', 'add_user');
-    formData.append('_wpnonce', DID_MANAGER._wpnonce);
+	    // Append additional data like action and nonce
+	    formData.append('action', 'add_user');
+	    formData.append('_wpnonce', DID_MANAGER._wpnonce);
 
-    dm_modal();
+	    dm_modal();
 
-    $.ajax({
-        type: 'POST',
-        url: DID_MANAGER.ajaxurl, 
-        data: formData, // Use FormData object directly
-        contentType: false, // Required for FormData
-        processData: false, // Required for FormData
-        success: function(response) {
-            dm_modal(false);
-            alert('Form submitted successfully!');
-        },
-        error: function(error) {
-            alert('Form submission failed!');
-            dm_modal(false);
-        }
-    });
-});
+	    $.ajax({
+	        type: 'POST',
+	        url: DID_MANAGER.ajaxurl, 
+	        data: formData, // Use FormData object directly
+	        contentType: false, // Required for FormData
+	        processData: false, // Required for FormData
+	        success: function(response) {
+	            dm_modal(false);
+	            alert('Form submitted successfully!');
+	        },
+	        error: function(error) {
+	            alert('Form submission failed!');
+	            dm_modal(false);
+	        }
+	    });
+	});
 
   
 
@@ -96,6 +96,27 @@ jQuery(function($){
 	    }
 	});
     
+    $('.image-input').on('change', function() {
+	    const imagePreview = $(this).data('preview'); // Use data attribute to target the preview element
+	    const file = this.files[0]; 
+	    previewImage(file, $(imagePreview));
+	});
+
+	function previewImage(file, imagePreview) {
+	    if (file) {
+	        const reader = new FileReader();
+
+	        reader.onload = function(e) {
+	            imagePreview.attr('src', e.target.result).show(); // Show the image preview
+	        };
+
+	        reader.readAsDataURL(file); // Read the file to preview it
+	    } else {
+	        imagePreview.attr('src', '').hide(); // Hide the preview if no file is selected
+	    }
+	}
+
+
 	
 })
 
