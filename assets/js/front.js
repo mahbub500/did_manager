@@ -10,7 +10,7 @@ let dm_modal = ( show = true ) => {
 jQuery(function($){
 
     // $('#dm_notice').hide();
-     $('#dm_submit').attr('disabled', true);
+     // $('#dm_submit').attr('disabled', true);
 
     function checkLength(inputElement, displayElementId) {
 	    const length = $(inputElement).val().length;
@@ -81,11 +81,8 @@ jQuery(function($){
 
 	            },
 	            error: function(error) {
-
 	            	console.log( error );
-	              
-
-	            }
+	             }
 	        });
 	    }
 	});
