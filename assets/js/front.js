@@ -33,9 +33,10 @@ jQuery(function($){
 	$('#add_user_form').on('submit', function(event) {
 	    event.preventDefault(); 
 
-	    const formData = new FormData(this); // Initialize FormData with the form element
+	    const formData = new FormData(this); 
+	   var form = this;
 
-	    // Append additional data like action and nonce
+
 	    formData.append('action', 'add_user');
 	    formData.append('_wpnonce', DID_MANAGER._wpnonce);
 
@@ -50,6 +51,7 @@ jQuery(function($){
 	        success: function(response) {
 	            dm_modal(false);
 	            alert('Form submitted successfully!');
+	            form.reset();
 	        },
 	        error: function(error) {
 	            alert('Form submission failed!');

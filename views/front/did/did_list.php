@@ -22,7 +22,7 @@
   <div class="form-group row">
     <label for="dm_mobile_no" class="col-sm-2 col-form-label">Mobile No :</label>
     <div class="col-sm-10">
-      <input type="number" min="0" max="10" required name="dm_mobile_no" class="form-control" id="dm_mobile_no" >
+      <input type="number" minlength="0" maxlength="10" required name="dm_mobile_no" class="form-control" id="dm_mobile_no" >
     </div>
   </div>
   <div class="form-group row">
