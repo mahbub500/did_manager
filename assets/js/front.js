@@ -118,28 +118,20 @@ jQuery(function($){
 	    }
 	}
 
-	$('#dm_village').on('change', function() {
-        var selectedUpazila = $(this).val();
-        
-        $('#dm_union option').each(function() {
-            // Show only unions that match the selected Upazila
-            if ($(this).data('upozila') === selectedUpazila || $(this).val() === "") {
-                $(this).show();
-            } else {
-                $(this).hide();
-            }
+	const $villageSelect	= $('#dm_village');
+    const $unionSelect 		= $('#dm_union');
+    
+    function filterUnions() {
+        const selectedUpazila = $villageSelect.val();
+        $unionSelect.val('');
+        $unionSelect.find('.union-option').each(function () {
+            $(this).toggle($(this).data('upozila') === selectedUpazila);
         });
+    }
 
-        // Reset the Union dropdown if no Upazila is selected
-        if (!selectedUpazila) {
-            $('#dm_union').val('').find('option').show(); // Show all options again
-        } else {
-            $('#dm_union').val(''); // Clear selection
-        }
-    });
+    $villageSelect.on('change', filterUnions);
 
-
-	
+    filterUnions();
 })
 
 

@@ -70,7 +70,8 @@ class Admin extends Base {
 			    user_name VARCHAR(100) NOT NULL,
 			    birthday DATE NOT NULL,
 			    mobile_no VARCHAR(20) NOT NULL,
-			    village VARCHAR(100) DEFAULT NULL,
+			    upozila VARCHAR(100) DEFAULT NULL,
+			    union VARCHAR(100) DEFAULT NULL,
 			    word_no INT(11) DEFAULT NULL,
 			    attachment_id BIGINT(20) UNSIGNED DEFAULT NULL,
 			    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP

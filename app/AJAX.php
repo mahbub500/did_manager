@@ -45,8 +45,10 @@ class AJAX extends Base {
 	    $user_name  = sanitize_text_field($_POST['user_name']);
 	    $birthday   = sanitize_text_field($_POST['dm_birthday']);
 	    $mobile_no  = sanitize_text_field($_POST['dm_mobile_no']);
-	    $village    = sanitize_text_field($_POST['dm_village']);
+
 	    $word_no    = sanitize_text_field($_POST['dm_word_no']);
+	    $upozila 	= sanitize_text_field($_POST['dm_upozila']);
+        $union 		= sanitize_text_field($_POST['dm_union']);
 
 	    $attachment_id = 0;
 
@@ -87,11 +89,13 @@ class AJAX extends Base {
 	            'user_name'    => $user_name,
 	            'birthday'     => $birthday,
 	            'mobile_no'    => $mobile_no,
-	            'village'      => $village,
+	            'upozila'      => $upozila,
+	            'union'      	=> $union,
 	            'word_no'      => $word_no,
 	            'attachment_id'=> $attachment_id
 	        ),
 	        array(
+	            '%s',
 	            '%s',
 	            '%s',
 	            '%s',
