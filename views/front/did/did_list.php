@@ -25,12 +25,38 @@
       <input type="number" minlength="0" maxlength="10" required name="dm_mobile_no" class="form-control" id="dm_mobile_no" >
     </div>
   </div>
-  <div class="form-group row">
-    <label for="dm_village" class="col-sm-2 col-form-label">Village :</label>
+ <div class="form-group row">
+    <label for="dm_village" class="col-sm-2 col-form-label">Upozila :</label>
     <div class="col-sm-10">
-      <input type="text" name="dm_village" class="form-control" id="dm_village" >
+        <select class="form-control" id="dm_village">
+            <option value="">Select Upozila</option>
+            <?php 
+            foreach (all_upozila_list() as $key => $value) {
+                echo '<option value="' . $key . '">' . str_replace('_', ' ', $key) . '</option>';
+            }
+            ?>
+        </select>
     </div>
-  </div>
+</div>
+
+<div class="form-group row">
+    <label for="dm_union" class="col-sm-2 col-form-label">Union :</label>
+    <div class="col-sm-10">
+        <select class="form-control" id="dm_union">
+            <option value="">Select Union</option>
+            <!-- Unions for each Upazila (hidden) -->
+            <?php foreach (all_upozila_list() as $key => $value): ?>
+                <?php foreach ($value as $union): ?>
+                    <option class="union-option" data-upozila="<?php echo $key; ?>" value="<?php echo $union; ?>">
+                        <?php echo $union; ?>
+                    </option>
+                <?php endforeach; ?>
+            <?php endforeach; ?>
+        </select>
+    </div>
+</div>
+
+
 
   <div class="form-group row">
     <label for="dm_word_no" class="col-sm-2 col-form-label">Word No :</label>
@@ -59,3 +85,4 @@
   </div>
    <button id="dm_submit" type="submit" disabled class="btn btn-primary">Submit</button>
 </form>
+
