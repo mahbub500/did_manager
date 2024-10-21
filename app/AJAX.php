@@ -41,6 +41,9 @@ class AJAX extends Base {
 	        wp_send_json_success($response);
 	    }
 
+	    $current_user_id = get_current_user_id();
+
+
 	    $nid_number = sanitize_text_field($_POST['nid_number']);
 	    $user_name  = sanitize_text_field($_POST['user_name']);
 	    $birthday   = sanitize_text_field($_POST['dm_birthday']);
@@ -69,7 +72,8 @@ class AJAX extends Base {
 	            'union'      	=> $union,
 	            'word_no'      => $word_no,
 	            'attachment_id'=> $dm_image_id,
-	            'nid'=> $dm_nid_id,
+	            'nid'			=> $dm_nid_id,
+	            'created_by'	=> $current_user_id
 	        ),
 	        array(
 	            '%s',
