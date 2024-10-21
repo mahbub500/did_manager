@@ -50,11 +50,10 @@ class AJAX extends Base {
 	    $upozila 	= sanitize_text_field($_POST['dm_upozila']);
         $union 		= sanitize_text_field($_POST['dm_union']);
 
-	    $attachment_id = 0;
 
 	   // Call the function for both 'dm_image' and 'dm_nid'
 		$dm_image_id = handle_image_upload('dm_image', $nid_number);
-		$dm_nid_id = handle_image_upload('dm_nid', $nid_number, '-nid');
+		$dm_nid_id 	= handle_image_upload('dm_nid_image', $nid_number, '-nid');
 
 	    global $wpdb;
 	    $table_name = $wpdb->prefix . 'did_user_data';

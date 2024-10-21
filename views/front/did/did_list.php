@@ -78,10 +78,10 @@
   </div>
 
   <div class="form-group row">
-    <label for="dm_nid" class="col-sm-2 col-form-label">Nid :</label>
+    <label for="dm_nid_image" class="col-sm-2 col-form-label">Nid :</label>
     <div class="col-sm-10">
-      <input type="file" name="dm_nid" class="form-control image-input" id="dm_nid" data-preview="#nid_preview" accept="image/*">
-<img id="nid_preview" src="" alt="NID Preview" style="display:none; max-width: 100px; margin-top: 10px;" />
+      <input type="file" name="dm_nid_image" class="form-control image-input" id="dm_nid_image" data-preview="#nid_preview" accept="image/*">
+    <img id="nid_preview" src="" alt="NID Preview" style="display:none; max-width: 100px; margin-top: 10px;" />
 
     </div>
   </div>

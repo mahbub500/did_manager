@@ -141,7 +141,7 @@ function all_upozila_list() {
 endif;
 
 /**
- * Noakhlai Upozila list
+ * Upload multiple image 
  */
 if( ! function_exists( 'handle_image_upload' ) ) :
 function handle_image_upload($file_key, $nid_number, $suffix = '') {
