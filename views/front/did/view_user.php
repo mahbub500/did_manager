@@ -48,13 +48,23 @@ $results = $wpdb->get_results("SELECT * FROM $table_name");
 			        echo wp_get_attachment_image($attachment_id, 'thumbnail'); 
 			        echo '</a>';
 			    } else {
-			        echo 'No image available'; 
+			        echo 'No image'; 
 			    }
 	        ?>
 
           </td>
           <td><?php 
-	       		echo wp_get_attachment_image($row->nid, 'thumbnail'); // Display the image
+
+	       		$nid = $row->nid; 
+    			$nid_url = wp_get_attachment_url($nid);
+
+	       		if ($nid_url) {
+	       			echo '<a href="' . esc_url($nid_url) . '" download>';
+			        echo wp_get_attachment_image($nid, 'thumbnail'); 
+			        echo '</a>';
+			    } else {
+			        echo 'No Nid '; 
+			    }
 	        ?>
           </td>
           <td>
