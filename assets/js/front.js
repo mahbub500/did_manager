@@ -50,6 +50,7 @@ jQuery(function($){
 	        success: function(response) {
 	            dm_modal(false);
 	            $('#image_preview, #nid_preview').hide();
+	            $('#dm_submit').attr('disabled', true);
 	            form.reset();
 	        },
 	        error: function(error) {
