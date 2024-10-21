@@ -49,7 +49,7 @@ jQuery(function($){
 	        processData: false, 
 	        success: function(response) {
 	            dm_modal(false);
-	            alert('Form submitted successfully!');
+	            $('#image_preview, #nid_preview').hide();
 	            form.reset();
 	        },
 	        error: function(error) {
