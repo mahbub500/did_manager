@@ -28,8 +28,8 @@
 <div class="form-group row">
     <label for="dm_upozila" class="col-sm-2 col-form-label">Upozila :</label>
     <div class="col-sm-10">
-        <select class="form-control" id="dm_upozila">
-            <option name='dm_upozila' value="">Select Upozila</option>
+        <select name='dm_upozila' class="form-control" id="dm_upozila">
+            <option  value="">Select Upozila</option>
             <?php 
             foreach (all_upozila_list() as $key => $value) {
                 $selected = ($key === 'Companiganj') ? 'selected' : '';  
@@ -44,12 +44,12 @@
 <div class="form-group row">
     <label for="dm_union" class="col-sm-2 col-form-label">Union :</label>
     <div class="col-sm-10">
-        <select class="form-control" id="dm_union">
+        <select name='dm_union' class="form-control" id="dm_union">
             <option value="">Select Union</option>
             <!-- Unions for each Upazila (hidden) -->
             <?php foreach (all_upozila_list() as $key => $value): ?>
                 <?php foreach ($value as $union): ?>
-                    <option name='dm_union' class="union-option" data-upozila="<?php echo $key; ?>" value="<?php echo $union; ?>">
+                    <option class="union-option" data-upozila="<?php echo $key; ?>" value="<?php echo $union; ?>">
                         <?php echo $union; ?>
                     </option>
                 <?php endforeach; ?>

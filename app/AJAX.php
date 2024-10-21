@@ -45,8 +45,8 @@ class AJAX extends Base {
 	    $user_name  = sanitize_text_field($_POST['user_name']);
 	    $birthday   = sanitize_text_field($_POST['dm_birthday']);
 	    $mobile_no  = sanitize_text_field($_POST['dm_mobile_no']);
-
 	    $word_no    = sanitize_text_field($_POST['dm_word_no']);
+
 	    $upozila 	= sanitize_text_field($_POST['dm_upozila']);
         $union 		= sanitize_text_field($_POST['dm_union']);
 
@@ -125,10 +125,10 @@ class AJAX extends Base {
 		$nid_no = isset($_POST['nid_no']) ? sanitize_text_field($_POST['nid_no']) : '';
 
 		global $wpdb;
-   		$table_name = $wpdb->prefix . 'did_user_list';
+   		$table_name = $wpdb->prefix . 'did_user_data';
 
 
-	    $existing_nid = $wpdb->get_var($wpdb->prepare("SELECT nid FROM $table_name WHERE nid = %s", $nid_no));
+	    $existing_nid = $wpdb->get_var($wpdb->prepare("SELECT nid_number FROM $table_name WHERE nid_number = %s", $nid_no));
 
 	
 

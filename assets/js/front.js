@@ -33,9 +33,8 @@ jQuery(function($){
 	$('#add_user_form').on('submit', function(event) {
 	    event.preventDefault(); 
 
-	    const formData = new FormData(this); 
+	   const formData = new FormData(this); 
 	   var form = this;
-
 
 	    formData.append('action', 'add_user');
 	    formData.append('_wpnonce', DID_MANAGER._wpnonce);
@@ -45,9 +44,9 @@ jQuery(function($){
 	    $.ajax({
 	        type: 'POST',
 	        url: DID_MANAGER.ajaxurl, 
-	        data: formData, // Use FormData object directly
-	        contentType: false, // Required for FormData
-	        processData: false, // Required for FormData
+	        data: formData, 
+	        contentType: false, 
+	        processData: false, 
 	        success: function(response) {
 	            dm_modal(false);
 	            alert('Form submitted successfully!');
