@@ -1,3 +1,16 @@
+<?php
+if ( ! is_user_logged_in() ) {
+
+      $current_url = esc_url( home_url( add_query_arg( null, null ) ) );
+      $login_url = wp_login_url( $current_url ); 
+
+      echo 'Please <a href="' . esc_url($login_url) . '">Login</a>'; 
+      return;
+  }
+?>
+
+
+
 <form id="add_user_form" name="add_user" method="post">
   <input type="hidden" name="action" value="add_user">
   <div class="form-group row">
