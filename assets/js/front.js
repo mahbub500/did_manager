@@ -136,6 +136,19 @@ jQuery(function($){
     $villageSelect.on('change', filterUnions);
 
     filterUnions();
+
+
+    $('.edit-button').click(function() {
+        var id = $(this).data('id');
+        // Your edit logic here
+        console.log('Edit button clicked for ID:', id);
+    });
+
+    $('.delete-button').click(function() {
+        var id = $(this).data('id');
+        // Your delete logic here
+        console.log('Delete button clicked for ID:', id);
+    });
 })
 
 

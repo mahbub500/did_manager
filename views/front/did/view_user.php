@@ -58,8 +58,8 @@ $results = $wpdb->get_results("SELECT * FROM $table_name");
 	        ?>
           </td>
           <td>
-          	<button class="btn btn-primary btn-sm">Edit</button>
-          	<button class="btn btn-danger btn-sm">Delete</button>
+          	<button class="btn btn-primary btn-sm edit-button" data-id="<?php echo esc_attr($row->id); ?>" >Edit</button>
+          	<button class="btn btn-danger btn-sm delete-button" data-id="<?php echo esc_attr($row->id); ?>" >Delete</button>
           </td>
         </tr>
       <?php endforeach; ?>
