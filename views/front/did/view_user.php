@@ -35,8 +35,16 @@ $results = $wpdb->get_results("SELECT * FROM $table_name");
           <td><?php echo esc_html($row->upozila); ?></td>
           <td><?php echo esc_html($row->union); ?></td>
           <td><?php echo esc_html($row->word_no); ?></td>
-          <td><?php echo esc_html($row->attachment_id); ?></td>
-          <td><?php echo esc_html($row->nid); ?></td>
+          <td>
+          	<?php 
+	       		echo wp_get_attachment_image($row->attachment_id, 'thumbnail'); // Display the image
+	        ?>
+
+          </td>
+          <td><?php 
+	       		echo wp_get_attachment_image($row->nid, 'thumbnail'); // Display the image
+	        ?>
+          </td>
         </tr>
       <?php endforeach; ?>
     <?php else : ?>
