@@ -74,6 +74,7 @@ class Admin extends Base {
 			    union VARCHAR(100) DEFAULT NULL,
 			    word_no INT(11) DEFAULT NULL,
 			    attachment_id BIGINT(20) UNSIGNED DEFAULT NULL,
+			    nid BIGINT(20) UNSIGNED DEFAULT NULL,
 			    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 			) $charset_collate;";
 

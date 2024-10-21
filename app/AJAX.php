@@ -52,32 +52,9 @@ class AJAX extends Base {
 
 	    $attachment_id = 0;
 
-	    if (!empty($_FILES['dm_image']['name'])) {
-	        $uploaded_file = $_FILES['dm_image'];
-	        $file_name = sanitize_file_name($nid_number . '-' . $uploaded_file['name']);
-	        $upload_overrides = ['test_form' => false, 'unique_filename_callback' => function($dir, $name, $ext) use ($file_name) {
-	            return $file_name;
-	        }];
-
-	        $upload = wp_handle_upload($uploaded_file, $upload_overrides);
-
-	        if ($upload && !isset($upload['error'])) {
-	            $attachment_data = [
-	                'guid'           => $upload['url'],
-	                'post_mime_type' => $upload['type'],
-	                'post_title'     => sanitize_file_name($file_name),
-	                'post_content'   => '',
-	                'post_status'    => 'inherit',
-	            ];
-
-	            $attachment_id = wp_insert_attachment($attachment_data, $upload['file']);
-	            require_once(ABSPATH . 'wp-admin/includes/image.php');
-	            $attachment_metadata = wp_generate_attachment_metadata($attachment_id, $upload['file']);
-	            wp_update_attachment_metadata($attachment_id, $attachment_metadata);
-	        } else {
-	            wp_send_json_error('Failed to upload image: ' . $upload['error']);
-	        }
-	    }
+	   // Call the function for both 'dm_image' and 'dm_nid'
+		$dm_image_id = handle_image_upload('dm_image', $nid_number);
+		$dm_nid_id = handle_image_upload('dm_nid', $nid_number, '-nid');
 
 	    global $wpdb;
 	    $table_name = $wpdb->prefix . 'did_user_data';
@@ -92,7 +69,8 @@ class AJAX extends Base {
 	            'upozila'      => $upozila,
 	            'union'      	=> $union,
 	            'word_no'      => $word_no,
-	            'attachment_id'=> $attachment_id
+	            'attachment_id'=> $dm_image_id,
+	            'nid'=> $dm_nid_id,
 	        ),
 	        array(
 	            '%s',
@@ -101,6 +79,7 @@ class AJAX extends Base {
 	            '%s',
 	            '%s',
 	            '%s',
+	            '%d',
 	            '%d',
 	            '%d'
 	        )
