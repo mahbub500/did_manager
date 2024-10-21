@@ -8,7 +8,7 @@ $table_name = $wpdb->prefix . 'did_user_data';
 $results = $wpdb->get_results("SELECT * FROM $table_name");
 ?>
 
-<table class="table">
+<table id="dm_table" class="table">
   <thead>
     <tr>
       <th scope="col">Sl</th>

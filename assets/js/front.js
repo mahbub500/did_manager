@@ -12,6 +12,8 @@ jQuery(function($){
     // $('#dm_notice').hide();
      // $('#dm_submit').attr('disabled', true);
 
+	let table = new DataTable('#dm_table');
+
     function checkLength(inputElement, displayElementId) {
 	    const length = $(inputElement).val().length;
 

@@ -41,7 +41,11 @@ class Front extends Base {
 
 		wp_enqueue_style( $this->slug, plugins_url( "/assets/css/front{$min}.css", DID_MANAGER ), '', $this->version, 'all' );
 
+		wp_enqueue_style( 'data-table', 'https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css', '', $this->version, 'all' );
+
 		wp_enqueue_script( $this->slug, plugins_url( "/assets/js/front{$min}.js", DID_MANAGER ), [ 'jquery' ], $this->version, true );
+
+		wp_enqueue_script( 'data-table', 'https://cdn.datatables.net/2.1.8/js/dataTables.min.js', [ 'jquery' ], $this->version, true );
 		
 		$localized = [
 			'ajaxurl'	=> admin_url( 'admin-ajax.php' ),
