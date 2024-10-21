@@ -21,6 +21,7 @@ $results = $wpdb->get_results("SELECT * FROM $table_name");
       <th scope="col">Word No</th>
       <th scope="col">Image</th>
       <th scope="col">NID</th>
+      <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
@@ -37,13 +38,28 @@ $results = $wpdb->get_results("SELECT * FROM $table_name");
           <td><?php echo esc_html($row->word_no); ?></td>
           <td>
           	<?php 
-	       		echo wp_get_attachment_image($row->attachment_id, 'thumbnail'); // Display the image
+
+
+	       		$attachment_id = $row->attachment_id; 
+    			$image_url = wp_get_attachment_url($attachment_id);
+
+	       		if ($image_url) {
+	       			echo '<a href="' . esc_url($image_url) . '" download>';
+			        echo wp_get_attachment_image($attachment_id, 'thumbnail'); 
+			        echo '</a>';
+			    } else {
+			        echo 'No image available'; 
+			    }
 	        ?>
 
           </td>
           <td><?php 
 	       		echo wp_get_attachment_image($row->nid, 'thumbnail'); // Display the image
 	        ?>
+          </td>
+          <td>
+          	<button class="btn btn-primary btn-sm">Edit</button>
+          	<button class="btn btn-danger btn-sm">Delete</button>
           </td>
         </tr>
       <?php endforeach; ?>
