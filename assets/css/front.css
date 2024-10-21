@@ -30,3 +30,12 @@
 .nav-tabs .nav-item:hover button {
   display: inline-block;
 }
+
+.nav-pills .nav-link {
+    color: #007bff; /* Default text color for inactive tabs */
+}
+
+.nav-pills .nav-link.active {
+    background-color: #007bff; /* Background color for active tab */
+    color: #fff; /* Text color for active tab */
+}

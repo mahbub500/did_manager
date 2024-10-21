@@ -57,7 +57,7 @@ class Admin extends Base {
 
 		global $wpdb;
 
-		$table_name = $wpdb->prefix . 'did_user_list';
+		$table_name = $wpdb->prefix . 'did_user_data';
 
 		if( $wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name ) {
 
