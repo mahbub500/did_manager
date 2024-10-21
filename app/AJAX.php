@@ -124,4 +124,44 @@ class AJAX extends Base {
 
 	}
 
+	public function delete_user(){
+
+		$response = [
+	        'status'  => 0,
+	        'message' => __('Unauthorized', 'did-manager'),
+	    ];
+
+	    if( ! wp_verify_nonce( $_POST['_wpnonce'] ) ) {
+			wp_send_json_success( $response );
+		}
+
+		// update_option( 'test_id', $_POST['id'] );
+		// return;
+
+		$item_id = $_POST['id']; 
+
+		global $wpdb;
+	    $table_name = $wpdb->prefix . 'did_user_data';
+	    $result = $wpdb->delete($table_name, array('id' => $item_id));
+
+    
+
+		$response = [
+	        'status'  => 1,
+	        'message' => __('User Deleted', 'did-manager'),
+	    ];
+
+	    if ($result) {
+	       wp_send_json_success( $response );
+	    } else {
+	        wp_send_json_error('Could not delete the item.');
+	    }
+
+	    
+
+
+
+
+	}
+
 }

@@ -144,11 +144,40 @@ jQuery(function($){
         console.log('Edit button clicked for ID:', id);
     });
 
-    $('.delete-button').click(function() {
-        var id = $(this).data('id');
-        // Your delete logic here
-        console.log('Delete button clicked for ID:', id);
+    // Delete user
+
+    $('.delete-button').on('click', function() {
+    var button = $(this);
+    var itemId = button.data('id');
+
+    if (confirm('Are you sure you want to delete this item?')) {
+        $.ajax({
+        type: 'POST',
+        url: DID_MANAGER.ajaxurl, // Make sure this is the correct spelling
+        data: {
+            id: itemId,
+            action: 'delete_user',
+            _wpnonce: DID_MANAGER._wpnonce
+        },
+        success: function(response) {
+            if (response.success) {
+                button.closest('tr').remove(); 
+                // alert('Item deleted successfully!');
+            } else {
+                alert('Error: ' + response.data);
+            }
+        },
+        error: function() {
+            alert('AJAX error: Unable to delete item.');
+        }
     });
+
+    }
+});
+
+
+
+
 })
 
 

@@ -191,6 +191,7 @@ final class Plugin {
 		$ajax = new App\AJAX( $this->plugin );
 		$ajax->priv( 'add_user', 'handle_add_user_data' );
 		$ajax->priv( 'check_nid', 'check_nid' );
+		$ajax->priv( 'delete_user', 'delete_user' );
 	}
 
 	/**
