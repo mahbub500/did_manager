@@ -118,13 +118,15 @@ jQuery(function($){
 	    }
 	}
 
-	const $villageSelect	= $('#dm_village');
+	const $villageSelect	= $('#dm_upozila');
     const $unionSelect 		= $('#dm_union');
+
     
     function filterUnions() {
         const selectedUpazila = $villageSelect.val();
         $unionSelect.val('');
         $unionSelect.find('.union-option').each(function () {
+
             $(this).toggle($(this).data('upozila') === selectedUpazila);
         });
     }
