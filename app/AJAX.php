@@ -181,5 +181,36 @@ class AJAX extends Base {
 	    }
 	}
 
+	function get_user_data() {
+	    if ( !isset($_POST['user_id']) || !is_numeric($_POST['user_id']) ) {
+	        wp_send_json_error('Invalid user ID.');
+	    }
+
+	    $user_id = intval($_POST['user_id']);
+	    
+	    global $wpdb;
+	    $table_name = $wpdb->prefix . 'did_user_data';  // Your custom table name
+
+	    // Fetch the user data
+	    $user_data = $wpdb->get_row(
+	        $wpdb->prepare(
+	            "SELECT nid_number, user_name FROM $table_name WHERE id = %d",
+	            $user_id
+	        )
+	    );
+
+	    if ( ! $user_data ) {
+	        wp_send_json_error('User not found.');
+	    }
+
+	    // Send the user data back to the front-end
+	    wp_send_json_success( array(
+	        'nid'  => $user_data->nid_number,
+	        'name' => $user_data->user_name
+	    ));
+	}
+
+
+
 
 }

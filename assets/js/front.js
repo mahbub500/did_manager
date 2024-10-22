@@ -176,6 +176,38 @@ jQuery(function($){
 });
 
 
+    $('.edit-button').on('click', function() {
+        var userId = $(this).data('id'); 
+
+       
+        $.ajax({
+            url: DID_MANAGER.ajaxurl,  
+            type: 'POST',
+            data: {
+                action: 'get_user_data',  
+                user_id: userId,
+                _wpnonce:DID_MANAGER._wpnonce
+            },
+            success: function(response) {
+                if (response.success) {
+                    
+                    $('#user_nid').val(response.data.nid);
+                    $('#user_name').val(response.data.name);
+                    // Show the edit form
+                    $('#edit-user-modal').modal('show');
+                } else {
+                    alert('Error fetching user data.');
+                }
+            },
+            error: function() {
+                alert('Failed to communicate with the server.');
+            }
+        });
+    });
+
+
+
+
 
 
 })

@@ -81,3 +81,13 @@ $results = $wpdb->get_results("SELECT * FROM $table_name");
     <?php endif; ?>
   </tbody>
 </table>
+
+<!-- Edit User Modal -->
+<div id="edit-user-modal" class="modal">
+    <div class="modal-content">
+        <form id="edit-user-form">
+            
+        </form>
+    </div>
+</div>
+
