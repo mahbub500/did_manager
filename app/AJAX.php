@@ -124,44 +124,62 @@ class AJAX extends Base {
 
 	}
 
-	public function delete_user(){
 
-		$response = [
+	public function delete_user() {
+	    // Initial unauthorized response
+	    $response = [
 	        'status'  => 0,
 	        'message' => __('Unauthorized', 'did-manager'),
 	    ];
 
-	    if( ! wp_verify_nonce( $_POST['_wpnonce'] ) ) {
-			wp_send_json_success( $response );
-		}
-
-		// update_option( 'test_id', $_POST['id'] );
-		// return;
-
-		$item_id = $_POST['id']; 
-
-		global $wpdb;
-	    $table_name = $wpdb->prefix . 'did_user_data';
-	    $result = $wpdb->delete($table_name, array('id' => $item_id));
-
-    
-
-		$response = [
-	        'status'  => 1,
-	        'message' => __('User Deleted', 'did-manager'),
-	    ];
-
-	    if ($result) {
-	       wp_send_json_success( $response );
-	    } else {
-	        wp_send_json_error('Could not delete the item.');
+	    // Verify nonce for security
+	    if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'] ) ) {
+	        wp_send_json_error( $response );
 	    }
 
-	    
+	    // Get the user ID from POST data
+	    $item_id = isset( $_POST['id'] ) ? intval( $_POST['id'] ) : 0;
 
+	    if ( !$item_id ) {
+	        wp_send_json_error( __('Invalid ID', 'did-manager') );
+	    }
 
+	    global $wpdb;
+	    $table_name = $wpdb->prefix . 'did_user_data';
 
+	    // Fetch attachment data before deleting the user record
+	    $attachment_data = $wpdb->get_results(
+	        $wpdb->prepare(
+	            "SELECT attachment_id, nid FROM $table_name WHERE id = %d", 
+	            $item_id
+	        ),
+	        ARRAY_A
+	    );
 
+	    // Delete the user record from the custom table
+	    $result = $wpdb->delete($table_name, array('id' => $item_id));
+
+	    // Check if the delete operation was successful
+	    if ($result) {
+	        // Delete attachments if they exist
+	        if ( !empty($attachment_data) ) {
+	            foreach ($attachment_data[0] as $data) {
+	                wp_delete_attachment($data, true);
+	            
+	            }
+	        }
+
+	        // Successful response
+	        $response = [
+	            'status'  => 1,
+	            'message' => __('User and attachments deleted', 'did-manager'),
+	        ];
+	        wp_send_json_success( $response );
+	    } else {
+	        // Failed response
+	        wp_send_json_error( __('Could not delete the user.', 'did-manager') );
+	    }
 	}
+
 
 }
