@@ -72,7 +72,7 @@ class Admin extends Base {
 			    mobile_no VARCHAR(20) NOT NULL,
 			    created_by BIGINT(20) NOT NULL,
 			    upozila VARCHAR(100) DEFAULT NULL,
-			    union VARCHAR(100) DEFAULT NULL,
+			    dm_union VARCHAR(100) DEFAULT NULL,
 			    word_no INT(11) DEFAULT NULL,
 			    attachment_id BIGINT(20) UNSIGNED DEFAULT NULL,
 			    nid BIGINT(20) UNSIGNED DEFAULT NULL,
