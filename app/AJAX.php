@@ -51,7 +51,7 @@ class AJAX extends Base {
 	    $word_no    = sanitize_text_field($_POST['dm_word_no']);
 
 	    $upozila 	= sanitize_text_field($_POST['dm_upozila']);
-        $union 		= sanitize_text_field($_POST['dm_union']);
+        $dm_union 	= sanitize_text_field($_POST['dm_union']);
 
 
 	   // Call the function for both 'dm_image' and 'dm_nid'
@@ -69,7 +69,7 @@ class AJAX extends Base {
 	            'birthday'     => $birthday,
 	            'mobile_no'    => $mobile_no,
 	            'upozila'      => $upozila,
-	            'union'      	=> $union,
+	            'dm_union'     => $dm_union,
 	            'word_no'      => $word_no,
 	            'attachment_id'=> $dm_image_id,
 	            'nid'			=> $dm_nid_id,
