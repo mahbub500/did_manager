@@ -152,15 +152,15 @@ $results = $wpdb->get_results("SELECT * FROM $table_name");
             <div class="form-group row">
                 <label for="dm_image_edit" class="col-sm-2 col-form-label">Image :</label>
                 <div class="col-sm-10">
-                    <input type="file"  name="dm_image_edit" class="form-control image-input" id="dm_image_edit" data-preview="#image_preview" accept="image/*">
-                    <img  id="image_preview" src="" alt="Image Preview" style="display:none; max-width: 100px; margin-top: 10px;" />
+                    <input type="file"  name="dm_image_edit" class="form-control image-input" id="dm_image_edit" data-preview="#image_preview" >
+                    <img  id="image_preview_edit" src="" alt="Image Preview" style="display:none; max-width: 100px; margin-top: 10px;" />
                 </div>
             </div>
             <div class="form-group row">
                 <label for="dm_nid_image_edit" class="col-sm-2 col-form-label">Nid :</label>
                 <div class="col-sm-10">
-                    <input type="file" name="dm_nid_image_edit" class="form-control image-input" id="dm_nid_image_edit" data-preview="#nid_preview" accept="image/*">
-                    <img id="nid_preview" src="" alt="NID Preview" style="display:none; max-width: 100px; margin-top: 10px;" />
+                    <input type="file" name="dm_nid_image_edit" class="form-control image-input" id="dm_nid_image_edit" data-preview="#nid_preview" >
+                    <img id="nid_preview_edit" src="" alt="NID Preview" style="display:none; max-width: 100px; margin-top: 10px;" />
                 </div>
             </div>
              <div class="modal-footer">

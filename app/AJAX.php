@@ -194,10 +194,16 @@ class AJAX extends Base {
 	   
 	    $user_data = $wpdb->get_row(
 		    $wpdb->prepare(
-		        "SELECT nid_number, user_name, birthday, mobile_no, upozila, dm_union, word_no FROM $table_name WHERE id = %d",
+		        "SELECT nid_number, user_name, birthday, mobile_no, upozila, dm_union, word_no, attachment_id, nid FROM $table_name WHERE id = %d",
 		       $post_id
 		    )
 		);
+
+		$attachment_id = $user_data->attachment_id; 
+    	$image_url = wp_get_attachment_url( $attachment_id );
+
+		$nid 		= $user_data->nid; 
+    	$nid_url 	= wp_get_attachment_url($nid);
 
 	    if ( ! $user_data ) {
 	        wp_send_json_error('User not found.');
@@ -211,7 +217,9 @@ class AJAX extends Base {
 	        'mobile_no'  => $user_data->mobile_no,
 	        'upozila'    => $user_data->upozila,
 	        'union'      => $user_data->dm_union,
-	        'word_no'    => $user_data->word_no
+	        'word_no'    => $user_data->word_no,
+	        'image'    	 => $image_url,
+	        'nid'    	 => $nid_url
 	    ));
 	}
 
