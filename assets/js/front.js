@@ -138,11 +138,7 @@ jQuery(function($){
     filterUnions();
 
 
-    $('.edit-button').click(function() {
-        var id = $(this).data('id');
-        // Your edit logic here
-        console.log('Edit button clicked for ID:', id);
-    });
+   
 
     // Delete user
 
@@ -204,7 +200,20 @@ jQuery(function($){
             }
         });
     });
+  	$('#close-modal').on('click', function() {
+  		console.log( 'tst' );
+        $('#edit-user-modal').hide();            
+        $('.modal-backdrop').remove();           
+        location.reload();                       
+    });
 
+  $(document).on('keydown', function(event) {
+        if (event.key === "Escape") { // Check if the 'Esc' key is pressed
+            $('#edit-user-modal').hide();
+            $('.modal-backdrop').remove();
+            location.reload();
+        }
+    });
 
 
 

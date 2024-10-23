@@ -1,9 +1,3 @@
-<?php
-
-?>
-
-
-
 <form id="add_user_form" name="add_user" method="post">
   <input type="hidden" name="action" value="add_user">
   <div class="form-group row">
