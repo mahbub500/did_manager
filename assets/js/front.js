@@ -192,7 +192,7 @@ jQuery(function($){
                     
                 	$('#dm_nid_edit').val(response.data.nid);
                		$('#dm_name_edit').val(response.data.name);
-                	$('#dm_birthday_edi').val(response.data.birthday);
+                	$('#dm_birthday_edit').val(response.data.birthday);
                 	$('#dm_mobile_no_edit').val(response.data.mobile_no);
                 	$('#dm_upozila_edit').val(response.data.upozila);
                 	$('#dm_union_edit').val(response.data.union);
