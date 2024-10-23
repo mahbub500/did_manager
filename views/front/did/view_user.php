@@ -46,7 +46,7 @@ $results = $wpdb->get_results("SELECT * FROM $table_name");
 
 	       		if ($image_url) {
 	       			echo '<a href="' . esc_url($image_url) . '" download>';
-			        echo wp_get_attachment_image($attachment_id, 'thumbnail'); 
+			        echo wp_get_attachment_image($attachment_id, array( 50, 50 )); 
 			        echo '</a>';
 			    } else {
 			        echo 'No image'; 
@@ -61,7 +61,7 @@ $results = $wpdb->get_results("SELECT * FROM $table_name");
 
 	       		if ($nid_url) {
 	       			echo '<a href="' . esc_url($nid_url) . '" download>';
-			        echo wp_get_attachment_image($nid, 'thumbnail'); 
+			        echo wp_get_attachment_image($nid, array( 50, 50 )); 
 			        echo '</a>';
 			    } else {
 			        echo 'No Nid '; 
