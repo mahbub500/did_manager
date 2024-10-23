@@ -88,7 +88,7 @@ $results = $wpdb->get_results("SELECT * FROM $table_name");
 
 
         <form id="edit-user-form">
-            <input type="hidden" name="action" value="add_user">
+            
             <div class="form-group row">
                 <label for="dm_nid_edit" class="col-sm-2 col-form-label">Nid :</label>
                 <div class="col-sm-10">

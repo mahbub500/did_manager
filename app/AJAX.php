@@ -181,7 +181,7 @@ class AJAX extends Base {
 	    }
 	}
 
-	function get_user_data() {
+	public function get_user_data() {
 	    if ( !isset($_POST['postID']) || !is_numeric($_POST['postID']) ) {
 	        wp_send_json_error('Invalid user ID.');
 	    }
@@ -221,6 +221,71 @@ class AJAX extends Base {
 	        'image'    	 => $image_url,
 	        'nid'    	 => $nid_url
 	    ));
+	}
+
+	public function update_user_data(){
+
+		$response = [
+	        'status'  => 0,
+	        'message' => __('Unauthorized', 'did-manager'),
+	    ];
+
+	    if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'] ) ) {
+	        wp_send_json_error( $response );
+	    }
+
+	    $nid_number = sanitize_text_field($_POST['nid_number']);
+    $user_name = sanitize_text_field($_POST['user_name']);
+    $birthday = sanitize_text_field($_POST['dm_birthday_edit']);
+    $mobile_no = sanitize_text_field($_POST['dm_mobile_no_edit']);
+    $upozila = sanitize_text_field($_POST['dm_upozila_edit']);
+    $union = sanitize_text_field($_POST['dm_union_edit']);
+    $word_no = sanitize_text_field($_POST['dm_word_no_edit']);
+    
+    // Handle file uploads
+    if (!empty($_FILES['dm_image_edit']['name'])) {
+        $upload = wp_handle_upload($_FILES['dm_image_edit'], array('test_form' => false));
+        if ($upload && !isset($upload['error'])) {
+            $image_url = $upload['url'];
+        } else {
+            wp_send_json_error('Image upload failed: ' . $upload['error']);
+        }
+    }
+
+    if (!empty($_FILES['dm_nid_image_edit']['name'])) {
+        $upload = wp_handle_upload($_FILES['dm_nid_image_edit'], array('test_form' => false));
+        if ($upload && !isset($upload['error'])) {
+            $nid_image_url = $upload['url'];
+        } else {
+            wp_send_json_error('NID image upload failed: ' . $upload['error']);
+        }
+    }
+
+    // Save the data (you can use update_user_meta, insert into a custom table, or update post meta, etc.)
+    $user_data = array(
+        'nid_number' => $nid_number,
+        'user_name' => $user_name,
+        'birthday' => $birthday,
+        'mobile_no' => $mobile_no,
+        'upozila' => $upozila,
+        'dm_union' => $union,
+        'word_no' => $word_no,
+        'image_url' => $image_url ?? '',
+        'nid_image_url' => $nid_image_url ?? ''
+    );
+
+    // Save to the database (this is just an example)
+    global $wpdb;
+    $wpdb->insert('wp_users_data', $user_data);
+
+    
+
+	    $response = [
+            'status'  => 1,
+            'message' => __('User Updated', 'did-manager'),
+        ];
+        wp_send_json_success( $response );
+
 	}
 
 

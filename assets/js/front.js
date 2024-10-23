@@ -188,8 +188,6 @@ jQuery(function($){
             },
             success: function(response) {
                 if (response.success) {
-                	console.log( response.data );
-                    
                 	$('#dm_nid_edit').val(response.data.nid);
                		$('#dm_name_edit').val(response.data.name);
                 	$('#dm_birthday_edit').val(response.data.birthday);
@@ -199,9 +197,7 @@ jQuery(function($){
                 	$('#dm_word_no_edit').val(response.data.word_no);
                 	$('#image_preview_edit').attr('src', response.data.image).show();  
     				$('#nid_preview_edit').attr('src', response.data.nid).show();
-
-
-                	$('#edit-user-modal').modal('show');
+    				$('#edit-user-modal').modal('show');
                 } else {
                     alert('Error fetching user data.');
                 }
@@ -212,7 +208,7 @@ jQuery(function($){
         });
     });
   	$('#close-modal').on('click', function() {
-  		console.log( 'tst' );
+
         $('#edit-user-modal').hide();            
         $('.modal-backdrop').remove();           
         location.reload();                       
@@ -229,33 +225,64 @@ jQuery(function($){
   // After reload show same tab
 
   $(document).ready(function() {
-    var activeTab = localStorage.getItem('activeTab');
+	    var activeTab = localStorage.getItem('activeTab');
 
-    if (activeTab) {
-        $('.nav-link').removeClass('active');
-        $('.tab-pane').removeClass('show active');
+	    if (activeTab) {
+	        $('.nav-link').removeClass('active');
+	        $('.tab-pane').removeClass('show active');
 
-        $(activeTab).addClass('active');
-        var targetTab = $(activeTab).data('target');
-        $(targetTab).addClass('show active');
-    }
+	        $(activeTab).addClass('active');
+	        var targetTab = $(activeTab).data('target');
+	        $(targetTab).addClass('show active');
+	    }
 
-    $('.nav-link').on('click', function() {
-        $('.nav-link').removeClass('active');
-        $('.tab-pane').removeClass('show active');
+	    $('.nav-link').on('click', function() {
+	        $('.nav-link').removeClass('active');
+	        $('.tab-pane').removeClass('show active');
 
-        $(this).addClass('active');
-        var targetTab = $(this).data('target');
-        $(targetTab).addClass('show active');
+	        $(this).addClass('active');
+	        var targetTab = $(this).data('target');
+	        $(targetTab).addClass('show active');
 
-        var tabId = '#' + $(this).attr('id');
-        localStorage.setItem('activeTab', tabId);
-    });
-});
+	        var tabId = '#' + $(this).attr('id');
+	        localStorage.setItem('activeTab', tabId);
+	    });
+	});
 
+   // Handle form submission
+	$('#edit-user-form').on('submit', function(e) {
+	    e.preventDefault(); // Prevent the default form submission
 
+	    // Create a FormData object and append additional data
+	    var formData = new FormData(this); 
+	    formData.append('action', 'edit_user'); 
+	    formData.append('_wpnonce', DID_MANAGER._wpnonce);
 
+	    // Debug: Log FormData contents
+	    for (var pair of formData.entries()) {
+	        console.log(`${pair[0]}: ${pair[1]}`);
+	    }
 
+	    // AJAX request to submit form data
+	    $.ajax({
+	        type: 'POST',
+	        url: DID_MANAGER.ajaxurl,
+	        data: formData,
+	        processData: false, 
+	        contentType: false, 
+	        success: function(response) {
+	            if (response.success) {
+	                // alert('Data saved successfully!');
+	                $('#edit-user-modal').modal('hide'); 
+	            } else {
+	                alert('An error occurred: ' + response.data); 
+	            }
+	        },
+	        error: function(xhr, status, error) {
+	            alert('AJAX error: ' + error); 
+	        }
+	    });
+	});
 
 
 })
