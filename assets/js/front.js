@@ -215,6 +215,34 @@ jQuery(function($){
         }
     });
 
+  // After reload show same tab
+
+  $(document).ready(function() {
+    var activeTab = localStorage.getItem('activeTab');
+
+    if (activeTab) {
+        $('.nav-link').removeClass('active');
+        $('.tab-pane').removeClass('show active');
+
+        $(activeTab).addClass('active');
+        var targetTab = $(activeTab).data('target');
+        $(targetTab).addClass('show active');
+    }
+
+    $('.nav-link').on('click', function() {
+        $('.nav-link').removeClass('active');
+        $('.tab-pane').removeClass('show active');
+
+        $(this).addClass('active');
+        var targetTab = $(this).data('target');
+        $(targetTab).addClass('show active');
+
+        var tabId = '#' + $(this).attr('id');
+        localStorage.setItem('activeTab', tabId);
+    });
+});
+
+
 
 
 

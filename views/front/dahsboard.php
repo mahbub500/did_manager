@@ -15,7 +15,7 @@
     <div class="col-md-12">
      <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
       <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="pills-home-tab" data-toggle="pill" data-target="#pills-add-user" type="button" >Add User</button>
+        <button class="nav-link " id="pills-home-tab" data-toggle="pill" data-target="#pills-add-user" type="button" >Add User</button>
       </li>
       <li class="nav-item" role="presentation">
         <button class="nav-link" id="pills-profile-tab" data-toggle="pill" data-target="#pills-view-user" type="button" >View User</button>
@@ -25,7 +25,7 @@
       </li>
     </ul>
     <div class="tab-content" id="pills-tabContent">
-      <div class="tab-pane fade show active" id="pills-add-user" role="tabpanel" aria-labelledby="pills-home-tab">
+      <div class="tab-pane fade " id="pills-add-user" role="tabpanel" aria-labelledby="pills-home-tab">
         <?php echo Helper::get_template( 'add_user', '/views/front/did' ); ?>
       </div>
       <div class="tab-pane fade" id="pills-view-user" role="tabpanel" aria-labelledby="pills-profile-tab">
