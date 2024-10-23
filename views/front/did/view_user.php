@@ -35,7 +35,7 @@ $results = $wpdb->get_results("SELECT * FROM $table_name");
           <td><?php echo esc_html($row->birthday); ?></td>
           <td><?php echo esc_html($row->mobile_no); ?></td>
           <td><?php echo esc_html($row->upozila); ?></td>
-          <td><?php echo esc_html($row->union); ?></td>
+          <td><?php echo esc_html($row->dm_union); ?></td>
           <td><?php echo esc_html($row->word_no); ?></td>
           <td>
           	<?php 
@@ -90,34 +90,34 @@ $results = $wpdb->get_results("SELECT * FROM $table_name");
         <form id="edit-user-form">
             <input type="hidden" name="action" value="add_user">
             <div class="form-group row">
-                <label for="dm_nid" class="col-sm-2 col-form-label">Nid :</label>
+                <label for="dm_nid_edit" class="col-sm-2 col-form-label">Nid :</label>
                 <div class="col-sm-10">
                     <input type="number" readonly value="" name="nid_number" class="form-control-plaintext" id="dm_nid_edit" placeholder="Enter your Nid" >
                     <small id="dm_notice" class="form-text "></small>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="dm_name" class="col-sm-2 col-form-label">Name :</label>
+                <label for="dm_name_edit" class="col-sm-2 col-form-label">Name :</label>
                 <div class="col-sm-10">
                     <input type="text" value="" required name="user_name" class="form-control" id="dm_name_edit" placeholder="Enter your name">
                 </div>
             </div>
             <div class="form-group row">
-                <label for="dm_birthday" class="col-sm-2 col-form-label">Birth Day :</label>
+                <label for="dm_birthday_edit" class="col-sm-2 col-form-label">Birth Day :</label>
                 <div class="col-sm-10">
-                    <input type="date" value="" name="dm_birthday" class="form-control" id="dm_birthday" required>
+                    <input type="date" value="" name="dm_birthday_edit" class="form-control" id="dm_birthday_edit" required>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="dm_mobile_no" class="col-sm-2 col-form-label">Mobile No :</label>
+                <label for="dm_mobile_no_edit" class="col-sm-2 col-form-label">Mobile No :</label>
                 <div class="col-sm-10">
-                    <input type="number" value="" minlength="0" maxlength="10" required name="dm_mobile_no" class="form-control" id="dm_mobile_no">
+                    <input type="number" value="" minlength="0" maxlength="10" required name="dm_mobile_no_edit" class="form-control" id="dm_mobile_no_edit">
                 </div>
             </div>
             <div class="form-group row">
-                <label for="dm_upozila" class="col-sm-2 col-form-label">Upozila :</label>
+                <label for="dm_upozila_edit" class="col-sm-2 col-form-label">Upozila :</label>
                 <div class="col-sm-10">
-                    <select name='dm_upozila' class="form-control" id="dm_upozila">
+                    <select name='dm_upozila_edit' class="form-control" id="dm_upozila_edit">
                         <option value="">Select Upozila</option>
                         <?php 
                         foreach (all_upozila_list() as $key => $value) {
@@ -129,9 +129,9 @@ $results = $wpdb->get_results("SELECT * FROM $table_name");
                 </div>
             </div>
             <div class="form-group row">
-                <label for="dm_union" class="col-sm-2 col-form-label">Union :</label>
+                <label for="dm_union_edit" class="col-sm-2 col-form-label">Union :</label>
                 <div class="col-sm-10">
-                    <select name='dm_union' class="form-control" id="dm_union">
+                    <select name='dm_union_edit' class="form-control" id="dm_union_edit">
                         <option value="">Select Union</option>
                         <?php foreach (all_upozila_list() as $key => $value): ?>
                             <?php foreach ($value as $union): ?>
@@ -144,22 +144,22 @@ $results = $wpdb->get_results("SELECT * FROM $table_name");
                 </div>
             </div>
             <div class="form-group row">
-                <label for="dm_word_no" class="col-sm-2 col-form-label">Word No :</label>
+                <label for="dm_word_no_edit" class="col-sm-2 col-form-label">Word No :</label>
                 <div class="col-sm-10">
-                    <input type="number" value="<?php echo esc_html($row->user_name); ?>" name="dm_word_no" class="form-control" id="dm_word_no">
+                    <input type="number" value="<?php echo esc_html($row->user_name); ?>" name="dm_word_no_edit" class="form-control" id="dm_word_no_edit">
                 </div>
             </div>
             <div class="form-group row">
-                <label for="dm_image" class="col-sm-2 col-form-label">Image :</label>
+                <label for="dm_image_edit" class="col-sm-2 col-form-label">Image :</label>
                 <div class="col-sm-10">
-                    <input type="file"  name="dm_image" class="form-control image-input" id="dm_image" data-preview="#image_preview" accept="image/*">
+                    <input type="file"  name="dm_image_edit" class="form-control image-input" id="dm_image_edit" data-preview="#image_preview" accept="image/*">
                     <img  id="image_preview" src="" alt="Image Preview" style="display:none; max-width: 100px; margin-top: 10px;" />
                 </div>
             </div>
             <div class="form-group row">
-                <label for="dm_nid_image" class="col-sm-2 col-form-label">Nid :</label>
+                <label for="dm_nid_image_edit" class="col-sm-2 col-form-label">Nid :</label>
                 <div class="col-sm-10">
-                    <input type="file" name="dm_nid_image" class="form-control image-input" id="dm_nid_image" data-preview="#nid_preview" accept="image/*">
+                    <input type="file" name="dm_nid_image_edit" class="form-control image-input" id="dm_nid_image_edit" data-preview="#nid_preview" accept="image/*">
                     <img id="nid_preview" src="" alt="NID Preview" style="display:none; max-width: 100px; margin-top: 10px;" />
                 </div>
             </div>

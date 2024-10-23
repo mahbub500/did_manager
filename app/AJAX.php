@@ -182,31 +182,36 @@ class AJAX extends Base {
 	}
 
 	function get_user_data() {
-	    if ( !isset($_POST['user_id']) || !is_numeric($_POST['user_id']) ) {
+	    if ( !isset($_POST['postID']) || !is_numeric($_POST['postID']) ) {
 	        wp_send_json_error('Invalid user ID.');
 	    }
 
-	    $user_id = intval($_POST['user_id']);
+	    $post_id = intval( $_POST['postID'] );
 	    
 	    global $wpdb;
-	    $table_name = $wpdb->prefix . 'did_user_data';  // Your custom table name
+	    $table_name = $wpdb->prefix . 'did_user_data'; 
 
-	    // Fetch the user data
+	   
 	    $user_data = $wpdb->get_row(
-	        $wpdb->prepare(
-	            "SELECT nid_number, user_name FROM $table_name WHERE id = %d",
-	            $user_id
-	        )
-	    );
+		    $wpdb->prepare(
+		        "SELECT nid_number, user_name, birthday, mobile_no, upozila, dm_union, word_no FROM $table_name WHERE id = %d",
+		       $post_id
+		    )
+		);
 
 	    if ( ! $user_data ) {
 	        wp_send_json_error('User not found.');
 	    }
 
 	    // Send the user data back to the front-end
-	    wp_send_json_success( array(
-	        'nid'  => $user_data->nid_number,
-	        'name' => $user_data->user_name
+	    wp_send_json_success(array(
+	        'nid'        => $user_data->nid_number,
+	        'name'       => $user_data->user_name,
+	        'birthday'   => $user_data->birthday,
+	        'mobile_no'  => $user_data->mobile_no,
+	        'upozila'    => $user_data->upozila,
+	        'union'      => $user_data->dm_union,
+	        'word_no'    => $user_data->word_no
 	    ));
 	}
 

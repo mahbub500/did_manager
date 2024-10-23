@@ -175,7 +175,7 @@ jQuery(function($){
 
 
     $('.edit-button').on('click', function() {
-        var userId = $(this).data('id'); 
+        var postID = $(this).data('id'); 
 
        
         $.ajax({
@@ -183,16 +183,21 @@ jQuery(function($){
             type: 'POST',
             data: {
                 action: 'get_user_data',  
-                user_id: userId,
+                postID: postID,
                 _wpnonce:DID_MANAGER._wpnonce
             },
             success: function(response) {
                 if (response.success) {
+                	console.log( response.data );
                     
-                    $('#user_nid').val(response.data.nid);
-                    $('#user_name').val(response.data.name);
-                    // Show the edit form
-                    $('#edit-user-modal').modal('show');
+                	$('#dm_nid_edit').val(response.data.nid);
+               		$('#dm_name_edit').val(response.data.name);
+                	$('#dm_birthday_edi').val(response.data.birthday);
+                	$('#dm_mobile_no_edit').val(response.data.mobile_no);
+                	$('#dm_upozila_edit').val(response.data.upozila);
+                	$('#dm_union_edit').val(response.data.union);
+                	$('#dm_word_no_edit').val(response.data.word_no);
+                	$('#edit-user-modal').modal('show');
                 } else {
                     alert('Error fetching user data.');
                 }
