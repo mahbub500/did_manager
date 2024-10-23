@@ -41,24 +41,30 @@ class Front extends Base {
 	public function enqueue_scripts() {
 		$min = defined( 'DID_MANAGER_DEBUG' ) && DID_MANAGER_DEBUG ? '' : '.min';
 
+		// Enqueue main plugin styles and scripts
 		wp_enqueue_style( $this->slug, plugins_url( "/assets/css/front{$min}.css", DID_MANAGER ), '', $this->version, 'all' );
 
-		wp_enqueue_style( 'data-table', 'https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css', '', $this->version, 'all' );
+		// Enqueue Bootstrap CSS
+		wp_enqueue_style('bootstrap-css', 'https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css', [], '4.6.2', 'all');
 
-		wp_enqueue_style( 'bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css', '', $this->version, 'all' );
-
+		// Enqueue plugin's JavaScript
 		wp_enqueue_script( $this->slug, plugins_url( "/assets/js/front{$min}.js", DID_MANAGER ), [ 'jquery' ], $this->version, true );
 
+		// Enqueue Bootstrap JS
+		wp_enqueue_script('bootstrap-js', 'https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js', ['jquery'], '4.6.2', true);
+
+		// Enqueue DataTables CSS and JS
+		wp_enqueue_style( 'data-table', 'https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css', '', $this->version, 'all' );
 		wp_enqueue_script( 'data-table', 'https://cdn.datatables.net/2.1.8/js/dataTables.min.js', [ 'jquery' ], $this->version, true );
 
-		wp_enqueue_script( 'bosstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js', [ 'jquery' ], $this->version, true );
-		
+		// Localize script with ajax URL and nonce
 		$localized = [
 			'ajaxurl'	=> admin_url( 'admin-ajax.php' ),
 			'_wpnonce'	=> wp_create_nonce(),
 		];
 		wp_localize_script( $this->slug, 'DID_MANAGER', apply_filters( "{$this->slug}-localized", $localized ) );
 	}
+
 
 	public function modal() {
 		echo '
