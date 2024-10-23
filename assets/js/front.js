@@ -121,7 +121,9 @@ jQuery(function($){
 	}
 
 	const $villageSelect	= $('#dm_upozila');
+	const $villageEdit		= $('#dm_upozila_edit');
     const $unionSelect 		= $('#dm_union');
+    const $unionEdit 		= $('#dm_union_edit');
 
     
     function filterUnions() {
