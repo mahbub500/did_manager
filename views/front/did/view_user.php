@@ -146,7 +146,7 @@ $results = $wpdb->get_results("SELECT * FROM $table_name");
             <div class="form-group row">
                 <label for="dm_word_no_edit" class="col-sm-2 col-form-label">Word No :</label>
                 <div class="col-sm-10">
-                    <input type="number" value="<?php echo esc_html($row->user_name); ?>" name="dm_word_no_edit" class="form-control" id="dm_word_no_edit">
+                    <input type="number" value="" name="dm_word_no_edit" class="form-control" id="dm_word_no_edit">
                 </div>
             </div>
             <div class="form-group row">
