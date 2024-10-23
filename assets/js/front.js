@@ -199,6 +199,8 @@ jQuery(function($){
                 	$('#dm_word_no_edit').val(response.data.word_no);
                 	$('#image_preview_edit').attr('src', response.data.image).show();  
     				$('#nid_preview_edit').attr('src', response.data.nid).show();
+
+
                 	$('#edit-user-modal').modal('show');
                 } else {
                     alert('Error fetching user data.');
