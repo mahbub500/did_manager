@@ -256,7 +256,7 @@ jQuery(function($){
 
 	    // Create a FormData object and append additional data
 	    var formData = new FormData(this); 
-	    formData.append('action', 'edit_user'); 
+	    formData.append('action', 'update_user_data'); 
 	    formData.append('_wpnonce', DID_MANAGER._wpnonce); 
 
 	    // AJAX request to submit form data

@@ -224,32 +224,36 @@ class AJAX extends Base {
 	    ));
 	}
 
-	public function update_user_data(){
+	public function update_user_data() {
+    $response = [
+        'status'  => 0,
+        'message' => __('Unauthorized', 'did-manager'),
+    ];
 
-		$response = [
-	        'status'  => 0,
-	        'message' => __('Unauthorized', 'did-manager'),
-	    ];
+    if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'] ) ) {
+        wp_send_json_error( $response );
+        exit();
+    }
 
-	    if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'] ) ) {
-	        wp_send_json_error( $response );
-	    }
+    $post_id    = sanitize_text_field($_POST['edit_post_id']);
+    $nid_number = sanitize_text_field($_POST['nid_number']);
+    $user_name  = sanitize_text_field($_POST['user_name']);
+    $birthday   = sanitize_text_field($_POST['dm_birthday_edit']);
+    $mobile_no  = sanitize_text_field($_POST['dm_mobile_no_edit']);
+    $upozila    = sanitize_text_field($_POST['dm_upozila_edit']);
+    $union      = sanitize_text_field($_POST['dm_union_edit']);
+    $word_no    = sanitize_text_field($_POST['dm_word_no_edit']);
 
-	    $nid_number = sanitize_text_field($_POST['nid_number']);
-    $user_name = sanitize_text_field($_POST['user_name']);
-    $birthday = sanitize_text_field($_POST['dm_birthday_edit']);
-    $mobile_no = sanitize_text_field($_POST['dm_mobile_no_edit']);
-    $upozila = sanitize_text_field($_POST['dm_upozila_edit']);
-    $union = sanitize_text_field($_POST['dm_union_edit']);
-    $word_no = sanitize_text_field($_POST['dm_word_no_edit']);
-    
-    // Handle file uploads
+    $image_url = '';
+    $nid_image_url = '';
+
     if (!empty($_FILES['dm_image_edit']['name'])) {
         $upload = wp_handle_upload($_FILES['dm_image_edit'], array('test_form' => false));
         if ($upload && !isset($upload['error'])) {
             $image_url = $upload['url'];
         } else {
             wp_send_json_error('Image upload failed: ' . $upload['error']);
+            exit();
         }
     }
 
@@ -259,35 +263,47 @@ class AJAX extends Base {
             $nid_image_url = $upload['url'];
         } else {
             wp_send_json_error('NID image upload failed: ' . $upload['error']);
+            exit();
         }
     }
 
-    // Save the data (you can use update_user_meta, insert into a custom table, or update post meta, etc.)
     $user_data = array(
-        'nid_number' => $nid_number,
-        'user_name' => $user_name,
-        'birthday' => $birthday,
-        'mobile_no' => $mobile_no,
-        'upozila' => $upozila,
-        'dm_union' => $union,
-        'word_no' => $word_no,
-        'image_url' => $image_url ?? '',
-        'nid_image_url' => $nid_image_url ?? ''
+        'nid_number'    => $nid_number,
+        'user_name'     => $user_name,
+        'birthday'      => $birthday,
+        'mobile_no'     => $mobile_no,
+        'upozila'       => $upozila,
+        'dm_union'      => $union,
+        'word_no'       => $word_no,
+        'attachment_id'     => $image_url,
+        'nid' => $nid_image_url
     );
 
-    // Save to the database (this is just an example)
     global $wpdb;
-    $wpdb->insert('wp_users_data', $user_data);
+    $table_name = $wpdb->prefix . 'did_user_data';
 
-    
+    // Update the data
+    $data = $wpdb->update(
+        $table_name,
+        $user_data,
+        ['id' => (int)$post_id],
+        ['%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s'],
+        ['%d']
+    );
 
-	    $response = [
-            'status'  => 1,
-            'message' => __('User Updated', 'did-manager'),
-        ];
-        wp_send_json_success( $response );
+    if (false === $data) {
+        wp_send_json_error('Database update failed: ' . $wpdb->last_error);
+        exit();
+    }
 
-	}
+    $response = [
+        'status'  => 1,
+        'message' => __('User Updated', 'did-manager'),
+    ];
+    wp_send_json_success($response);
+    exit();
+}
+
 
 
 

@@ -193,7 +193,7 @@ final class Plugin {
 		$ajax->priv( 'check_nid', 'check_nid' );
 		$ajax->priv( 'delete_user', 'delete_user' );
 		$ajax->priv( 'get_user_data', 'get_user_data' );
-		$ajax->priv( 'edit_user', 'update_user_data' );
+		$ajax->priv( 'update_user_data', 'update_user_data' );
 	}
 
 	/**
