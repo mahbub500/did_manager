@@ -274,10 +274,17 @@ class AJAX extends Base {
         'mobile_no'     => $mobile_no,
         'upozila'       => $upozila,
         'dm_union'      => $union,
-        'word_no'       => $word_no,
-        'attachment_id'     => $image_url,
-        'nid' => $nid_image_url
+        'word_no'       => $word_no
     );
+
+    if ( !empty( $image_url ) || !empty( $nid_image_url ) ) {
+    $user_data = array_merge( $user_data, array( 
+        'attachment_id' => $image_url,
+        'nid'           => $nid_image_url
+    ));
+}
+
+    
 
     global $wpdb;
     $table_name = $wpdb->prefix . 'did_user_data';
