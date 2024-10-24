@@ -92,7 +92,7 @@ $results = $wpdb->get_results("SELECT * FROM $table_name");
             <div class="form-group row">
                 <label for="dm_nid_edit" class="col-sm-2 col-form-label">Nid :</label>
                 <div class="col-sm-10">
-                    <input type="number" readonly value="" name="nid_number" class="form-control-plaintext" id="dm_nid_edit" placeholder="Enter your Nid" >
+                    <input type="number" readonly value="" name="nid_number" class="form-control" id="dm_nid_edit" placeholder="Enter your Nid" >
                     <small id="dm_notice" class="form-text "></small>
                 </div>
             </div>

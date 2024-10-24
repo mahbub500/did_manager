@@ -188,7 +188,7 @@ jQuery(function($){
             },
             success: function(response) {
                 if (response.success) {
-                	$('#dm_nid_edit').val(response.data.nid);
+                	$('#dm_nid_edit').val(response.data.nid_number);
                		$('#dm_name_edit').val(response.data.name);
                 	$('#dm_birthday_edit').val(response.data.birthday);
                 	$('#dm_mobile_no_edit').val(response.data.mobile_no);
@@ -256,12 +256,7 @@ jQuery(function($){
 	    // Create a FormData object and append additional data
 	    var formData = new FormData(this); 
 	    formData.append('action', 'edit_user'); 
-	    formData.append('_wpnonce', DID_MANAGER._wpnonce);
-
-	    // Debug: Log FormData contents
-	    for (var pair of formData.entries()) {
-	        console.log(`${pair[0]}: ${pair[1]}`);
-	    }
+	    formData.append('_wpnonce', DID_MANAGER._wpnonce); 
 
 	    // AJAX request to submit form data
 	    $.ajax({
