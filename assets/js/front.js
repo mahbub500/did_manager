@@ -188,6 +188,7 @@ jQuery(function($){
             },
             success: function(response) {
                 if (response.success) {
+                	$('#edit_post_id').val(response.data.post_id);
                 	$('#dm_nid_edit').val(response.data.nid_number);
                		$('#dm_name_edit').val(response.data.name);
                 	$('#dm_birthday_edit').val(response.data.birthday);

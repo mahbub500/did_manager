@@ -211,7 +211,8 @@ class AJAX extends Base {
 
 	    // Send the user data back to the front-end
 	    wp_send_json_success(array(
-	        'nid_number'        => $user_data->nid_number,
+	        'post_id' 	 => $post_id,
+	        'nid_number' => $user_data->nid_number,
 	        'name'       => $user_data->user_name,
 	        'birthday'   => $user_data->birthday,
 	        'mobile_no'  => $user_data->mobile_no,
